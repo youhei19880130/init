@@ -8,17 +8,33 @@ set nohlsearch
 set cursorline
 set number  
 
+let mapleader = ","
+let g:maplocalleader = ","
+
 set autoindent
-set tabstop=2
 set shiftwidth=2
+set tabstop=2
+set expandtab
 
 highlight Normal ctermbg=black ctermfg=grey
 highlight StatusLine term=none cterm=none ctermfg=black ctermbg=grey
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray
-
+   
 " vimのバックアップファイル
 set directory=~/tmp/.swap
 set backupdir=~/tmp/.~
+
+"神田式
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+noremap <C-j> <C-^>
+imap jj <ESC>
+
+nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
+
 
 " Anywhere SID.
 function! s:SID_PREFIX()
@@ -91,9 +107,12 @@ NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'AutoClose'
 NeoBundle 'basyura/unite-rails'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc' 
 NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neocomplcache-rsense.vim'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'tmhedberg/matchit'
 "NeoBundle 'Shougo/neosnippet'
 filetype plugin indent on " required!
 filetype indent on
@@ -117,22 +136,48 @@ nmap <F6> :NERDTree<CR>
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
 " バッファ一覧
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> <Leader>ub :<C-u>Unite buffer<CR>
 " ファイル一覧
-nnoremap <silent> ,uf :<C-u>Unite file<CR>
-nnoremap <silent> ,ufa :<C-u>Unite -input=**/* file<CR>
-nnoremap <silent> ,ff :<C-u>Unite file<CR>
-nnoremap <silent> ,ffa :<C-u>Unite -input=**/* file<CR>
+nnoremap <silent> <Leader>uf :<C-u>Unite file<CR>
+nnoremap <silent> <Leader>ufa :<C-u>Unite -input=**/* file<CR>
+nnoremap <silent> <Leader>ff :<C-u>Unite file<CR>
+nnoremap <silent> <Leader>ffa :<C-u>Unite -input=**/* file<CR>
 " ファイル一覧(現在開いているファイルのディレクトリ)
-nnoremap <silent> ,ufc :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> <Leader>ufc :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> <Leader>ur :<C-u>Unite -buffer-name=register register<CR>
 " 最近使用したファイル一覧
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+nnoremap <silent> <Leader>um :<C-u>Unite file_mru<CR>
 " 常用セット
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> <Leader>uu :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
-nnoremap <silent> ,ua :<C-u>Unite buffer file_mru bookmark file<CR>"
+nnoremap <silent> <Leader>ua :<C-u>Unite buffer file_mru bookmark file<CR>"
+
+"""""""""vimprocの設定 (unite grep)" {{{
+" insert modeで開始
+let g:unite_enable_start_insert = 1
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" " grep検索
+nnoremap <silent> <Leader>g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+
+" カーソル位置の単語をgrep検索 
+nnoremap <silent> <Leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+
+" grep検索結果の再呼出
+nnoremap <silent> <Leader>r  :<C-u>UniteResume search-buffer<CR>
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+"}}}
+
 
 """"""""""easymotion　…使い方がわからないorz
 " Lokaltog/vim-easymotion
@@ -141,6 +186,7 @@ nnoremap <silent> ,ua :<C-u>Unite buffer file_mru bookmark file<CR>"
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
 " 「;」 + 何かにマッピング
 let g:EasyMotion_leader_key=";"
+
 " 1 ストローク選択を優先する
 let g:EasyMotion_grouping=1
 " カラー設定変更

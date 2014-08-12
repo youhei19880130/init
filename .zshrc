@@ -93,7 +93,7 @@ export CLICOLOR=1
 export LSCOLORS=FxfxcxdxCxegedabagacad
 
 alias ls="ls -G"
-alias clone="git clone git@github.com:youhei19880130/amoadManage.git"
+#alias clone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias gocd="cd ~/caamoad/amoadManage"
 alias grail="bundle exec rails server -d"
 
