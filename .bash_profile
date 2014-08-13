@@ -1,13 +1,15 @@
 #PS1='[\u@\h \W]\\$'
-PS1='\e[1;34m\h:\W \e[1;32m\u\$ \e[0m'
+#PS1='\e[1;34m\h:\W \e[1;32m\u\$ \e[0m'
+PS1="\[\033[36m\]\u\[\033[m\]@\[\033[36m\]\w\[\033[m\]\$ "
 
 export CLICOLOR=1
 #export LSCOLORS=FxfxcxdxCxegedabagacad
 export LSCOLORS=fxgxcxdxbxegedabagacad
 
 alias caamo="~/caamoad/amoadMabnage"
-
 alias vi="vim"
+alias cp='cp -i'
+alias rm='rm -v' 
 alias ls="ls -G"
 alias oclone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias gocd="cd ~/caamoad/amoadManage"
