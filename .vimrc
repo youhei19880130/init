@@ -90,7 +90,7 @@ nnoremap OD gi<Left>
 
 "クリップボードの共有
 ""set clipboard+=autoselect #有効にするとヤンクの[p]が効かなくなる
-"set clipboard+=unnamed
+set clipboard+=unnamed
 
 set nocompatible " be iMproved
 filetype off
@@ -107,14 +107,15 @@ NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'AutoClose'
 NeoBundle 'basyura/unite-rails'
 NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'Shougo/vimproc' 
+NeoBundle 'Shougo/vimproc' 
 NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neocomplcache-rsense.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
 "NeoBundle 'Shougo/neosnippet'
-filetype plugin indent on " required!
+NeoBundle 'vim-scripts/Align'
+filetype plugin indent on " require
 filetype indent on
 syntax on
 
