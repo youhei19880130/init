@@ -96,6 +96,7 @@ alias ls="ls -G"
 #alias clone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias gocd="cd ~/caamoad/amoadManage"
 alias grail="bundle exec rails server -d"
+alias sbash="source ~/.bashrc"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

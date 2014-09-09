@@ -23,6 +23,7 @@ highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray
 " vimのバックアップファイル
 set directory=~/tmp/.swap
 set backupdir=~/tmp/.~
+set undodir=~/tmp/.un~
 
 "神田式
 noremap j gj
@@ -115,6 +116,8 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
 "NeoBundle 'Shougo/neosnippet'
 NeoBundle 'vim-scripts/Align'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'thinca/vim-quickrun'
 filetype plugin indent on " require
 filetype indent on
 syntax on
@@ -194,3 +197,11 @@ let g:EasyMotion_grouping=1
 hi EasyMotionTarget ctermbg=none ctermfg=red
 hi EasyMotionShade  ctermbg=none ctermfg=blue
 
+"""""""""" multi_cursor "
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+"""""""""" Quickrun "
+nnoremap <silent> <C-q> :QuickRun<CR>

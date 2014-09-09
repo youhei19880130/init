@@ -14,6 +14,7 @@ alias ls="ls -G"
 alias oclone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias gocd="cd ~/caamoad/amoadManage"
 alias grail="bundle exec rails server -d"
+alias sbash="source ~/.bashrc"
 alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
 ##localのmerge済みブランチの削除
