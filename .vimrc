@@ -1,18 +1,100 @@
+"シンタックス・ハイライトをON
+syntax on
+hi clear
+
+"leaderを変更
+let mapleader = ","
+let g:maplocalleader = ","
+
+"set autochdir
+set directory=$HOME
+
+"検索結果をハイライト
+set hlsearch
+
+"TITLEを表示する
+set title
+set titlestring=
+
+"入力中のコマンドを表示
+set showcmd
+
+"zshっぽい補完に
+set wildmenu wildmode=list:full
+
+"長い行は折り返さない
+"set nowrap
+
+"検索をファイルの先頭へループ
+set wrapscan
+
+"日本語対応
+"set encoding=japan
+
+"let twitvim_count = 100TERMの文字コード
+set termencoding=utf-8
+
+"デフォルト文字コード
+set fileencoding=utf-8
+
+"文字コード
+set fileencodings=utf-8,euc-jp,jis,sjis,ucs-bom,iso-2022-jp,utf-16,cp932,latin1
+
+"他で編集したら自動再読み込み
+set autoread
+
+"デフォルトファイルフォーマット
+set fileformat=unix
+
+"改行コード
+set fileformats=unix,dos,mac
+
+"特殊文字対策(Unicodeのときのみ有効)
+set ambiwidth=double
+
+"新しい行のインデントを現在行と同じにする
+set autoindent
+
+"新しい行を作ったときに高度な自動インデントを行う
+"コピペしたときとかうっとおしいのでやらない
+"set smartindent
+
+"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+set smarttab
+set shiftwidth=2
+
+" viminfoファイルを作成しない
+set viminfo=
+
+"ルーラー表示
+set ruler
+
+"行番号を表示
+set number
+
+"ファイル名の展開にスラッシュを使う。
+set shellslash
+
+"listで表示される文字のフォーマットを指定する
+set listchars=eol:<,tab:\|>
+
+"タブ文字、行末など不可視文字を表示する
+set nolist
+
+"タブが２つ以上になったらタブバーを表示
+set showtabline=1
+
+"クリップボード連携
+set clipboard=unnamed
+vmap <silent> <Leader>y "*y
+if has('gui') | set clipboard= | endif
+
+"-----
 set backspace=start,eol,indent
 set whichwrap=b,s,[,],,~
 set mouse=a
 set incsearch
-set wildmenu wildmode=list:full
-syntax on
-set nohlsearch
 set cursorline
-set number  
-
-let mapleader = ","
-let g:maplocalleader = ","
-
-set autoindent
-set shiftwidth=2
 set tabstop=2
 set expandtab
 
