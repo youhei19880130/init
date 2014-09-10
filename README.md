@@ -25,6 +25,7 @@ easymotion
 
 ■その他
 ```
+天野さんを参考に(https://github.com/amasho/dotfiles/blob/master/.vimrc)
 noremap :再帰的にxxxしない
 USキーボードxxx
 ```
