@@ -1,4 +1,8 @@
-# Path to your oh-my-zsh installation.
+alias cp='cp -i'
+alias rm='rm -v'
+alias ls='ls -G'
+
+#Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export LSCOLORS=gxfxcxdxbxegedabagacad 
 
@@ -88,15 +92,25 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 #以後、bashファイルのコピー
 #PS1="[\u@\h \W]\\$"
 #PS1='\e[1;34m\h:\W \e[1;32m\u\$ \e[0m'
-
 export CLICOLOR=1
 export LSCOLORS=FxfxcxdxCxegedabagacad
 
+alias cp='cp -i'
+alias rm='rm -v'
 alias ls="ls -G"
 #alias clone="git clone git@github.com:youhei19880130/amoadManage.git"
+alias oclone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias gocd="cd ~/caamoad/amoadManage"
 alias grail="bundle exec rails server -d"
 alias sbash="source ~/.bashrc"
+alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags' 
+
+##localのmerge済みブランチの削除
+alias gbld="git branch --merged | grep -v '*' | xargs -I % git branch -d %"
+
+##remoteのmerge済みブランチの削
+##※自分のremoteリポジトリがoriginで登録されていることが前提
+alias gbrd="git branch -a --merged | grep -v master | grep remotes/origin| sed -e 's% *remotes/origin/%%' | xargs -I% git push origin :%"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

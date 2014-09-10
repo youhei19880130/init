@@ -205,3 +205,5 @@ let g:multi_cursor_quit_key='<Esc>'
 
 """""""""" Quickrun "
 nnoremap <silent> <C-q> :QuickRun<CR>
+let g:quickrun_config={'*': {'split': 'vertical'}}
+set splitright
