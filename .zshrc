@@ -98,6 +98,7 @@ export LSCOLORS=FxfxcxdxCxegedabagacad
 alias cp='cp -i'
 alias rm='rm -v'
 alias ls="ls -G"
+alias diff='diff --color'
 #alias clone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias oclone="git clone git@github.com:youhei19880130/amoadManage.git"
 alias gocd="cd ~/caamoad/amoadManage"

@@ -94,13 +94,13 @@ set backspace=start,eol,indent
 set whichwrap=b,s,[,],,~
 set mouse=a
 set incsearch
-set cursorline
+"set cursorline ※vimのカーソル移動が遅くなるらしい
 set tabstop=2
 set expandtab
 
 highlight Normal ctermbg=black ctermfg=grey
 highlight StatusLine term=none cterm=none ctermfg=black ctermbg=grey
-highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray
+"highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray ※vimのカーソル移動が遅くなるらしい
    
 " vimのバックアップファイル
 set directory=~/tmp/.swap
@@ -200,9 +200,15 @@ NeoBundle 'tmhedberg/matchit'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 filetype plugin indent on " require
 filetype indent on
 syntax on
+
+"""""""""Markdown仕様"
+au BufRead,BufNewFile *.md set filetype=markdown
 
 """""""""Unite-rails"
 noremap :rc :<C-u>Unite rails/controller<CR>
