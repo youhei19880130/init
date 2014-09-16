@@ -5,6 +5,7 @@ tab
 previous buffer
 tab
 easymotion
+powerline
 (hisyory) 
 ```
 
