@@ -6,7 +6,8 @@ previous buffer
 tab
 easymotion
 powerline
-(hisyory) 
+vim-anzu
+(history) 
 ```
 
 ■tmux
