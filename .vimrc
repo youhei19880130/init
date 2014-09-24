@@ -203,6 +203,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'osyo-manga/vim-anzu'
 filetype plugin indent on " require
 filetype indent on
 syntax on
@@ -295,3 +296,17 @@ let g:multi_cursor_quit_key='<Esc>'
 nnoremap <silent> <C-q> :QuickRun<CR>
 let g:quickrun_config={'*': {'split': 'vertical'}}
 set splitright
+
+"""""""""" vim-anzu "
+" キーマップ設定
+" nmap n <Plug>(anzu-n)
+" nmap N <Plug>(anzu-N)
+nmap n nzz<Plug>(anzu-update-search-status)
+nmap N Nzz<Plug>(anzu-update-search-status)
+nmap * <Plug>(anzu-star)
+nmap # <Plug>(anzu-sharp)
+" ESC2回押しで検索ハイライトを消去
+nmap <silent> <ESC><ESC> :<C-u>nohlsearch<CR><Plug>(anzu-clear-search-status)
+" format = (該当数/全体数)
+let g:anzu_status_format = "(%i/%l)"
+
