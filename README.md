@@ -3,10 +3,8 @@
 history
 tab
 previous buffer
-tab
 easymotion
 powerline
-vim-anzu
 (history) 
 ```
 

@@ -308,5 +308,6 @@ nmap # <Plug>(anzu-sharp)
 " ESC2回押しで検索ハイライトを消去
 nmap <silent> <ESC><ESC> :<C-u>nohlsearch<CR><Plug>(anzu-clear-search-status)
 " format = (該当数/全体数)
+set statusline=%{anzu#search_status()}
 let g:anzu_status_format = "(%i/%l)"
 
