@@ -4,8 +4,8 @@ history
 tab
 previous buffer
 easymotion
-powerline
 (history) 
+submode(http://d.hatena.ne.jp/thinca/20130131/1359567419)
 ```
 
 ■tmux

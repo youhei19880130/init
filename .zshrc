@@ -5,6 +5,7 @@ alias ls='ls -G'
 #Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export LSCOLORS=gxfxcxdxbxegedabagacad 
+export TERM=xterm-256color
 
 # rails.vimの設定関連(20140806)
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
