@@ -203,11 +203,11 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
-"NeoBundle 'osyo-manga/vim-anzu'
-"NeoBundle 'itchyny/lightline.vim'
-"NeoBundle 'tpope/vim-fugitive'
-"NeoBundle 'violetyk/cake.vim'
-"NeoBundle 'majutsushi/tagbar'
+NeoBundle 'osyo-manga/vim-anzu'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'violetyk/cake.vim'
+NeoBundle 'majutsushi/tagbar'
 filetype plugin indent on " require
 filetype indent on
 syntax on
