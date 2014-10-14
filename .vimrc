@@ -317,6 +317,11 @@ set statusline=%f%m%=%l,%c\ %{'['.(&fenc!=''?&fenc:&enc).']\['.&fileformat.']'}
 let g:anzu_status_format = "(%i/%l)"
 
 """""""""" lightline.vim" (from:http://yuheikagaya.hatenablog.jp/entry/2013/09/20/232719)
+set t_Co=256
+scriptencoding utf-8
+set encoding=utf-8
+set guifont=Ricty\ 10
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'mode_map': {'c': 'NORMAL'},
@@ -333,8 +338,6 @@ let g:lightline = {
       \   'fugitive': 'MyFugitive',
       \   'filename': 'MyFilename',
       \   'fileformat': 'MyFileformat',
-      \   'filetype': 'MyFiletype',
-      \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
       \   'anzu': 'anzu#search_status',
       \   'currenttag': 'MyCurrentTag',
@@ -343,6 +346,7 @@ let g:lightline = {
       \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
       \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
       \ }
+let g:lightline.component.tabopts = '%{&et?"et":""}%{&ts}:%{&sw}:%{&sts},%{&tw}'
 
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -373,14 +377,6 @@ endfunction
 
 function! MyFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! MyFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
