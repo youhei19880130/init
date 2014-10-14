@@ -24,3 +24,9 @@ alias gbld="git branch --merged | grep -v '*' | xargs -I % git branch -d %"
 ##remoteのmerge済みブランチの削除
 ##※自分のremoteリポジトリがoriginで登録されていることが前提
 alias gbrd="git branch -a --merged | grep -v master | grep remotes/origin| sed -e 's% *remotes/origin/%%' | xargs -I% git push origin :%"
+export PATH=/usr/local/bin:$PATH
+
+export PATH=/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/a12777/.rvm/bin:/usr/local/mysql/bin
+
+export PATH=/Users/a12777/.rbenv/shims:/Users/a12777/.rbenv/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/a12777/.rvm/bin:/usr/local/mysql/bin
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
