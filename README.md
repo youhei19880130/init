@@ -6,7 +6,7 @@ previous buffer
 easymotion
 (history) 
 submode(http://d.hatena.ne.jp/thinca/20130131/1359567419)
-lightline.vim …http://leafcage.hateblo.jp/entry/2013/10/21/lightlinevim-customize
+lightline.vimにanzuをいれたい
 ```
 
 ■tmux

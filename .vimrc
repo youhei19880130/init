@@ -85,9 +85,8 @@ set nolist
 set showtabline=1
 
 "クリップボード連携
-set clipboard=unnamed
-vmap <silent> <Leader>y "*y
-if has('gui') | set clipboard= | endif
+"vmap <silent> <Leader>y "*y
+"if has('gui') | set clipboard= | endif
 
 "-----
 set backspace=start,eol,indent
@@ -172,8 +171,8 @@ nnoremap OD gi<Left>
 
 
 "クリップボードの共有
-""set clipboard+=autoselect #有効にするとヤンクの[p]が効かなくなる
-set clipboard+=unnamed
+set clipboard+=autoselect "有効にするとヤンクの[p]が効かなくなる
+set clipboard=unnamed
 
 set nocompatible " be iMproved
 filetype off
@@ -206,6 +205,7 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'violetyk/cake.vim'
 NeoBundle 'majutsushi/tagbar'
 filetype plugin indent on " require
@@ -317,58 +317,144 @@ set statusline=%f%m%=%l,%c\ %{'['.(&fenc!=''?&fenc:&enc).']\['.&fileformat.']'}
 let g:anzu_status_format = "(%i/%l)"
 
 """""""""" lightline.vim" (from:http://yuheikagaya.hatenablog.jp/entry/2013/09/20/232719)
-set t_Co=256
-scriptencoding utf-8
-set encoding=utf-8
-set guifont=Ricty\ 10
+"set t_Co=256
+"scriptencoding utf-8
+"set encoding=utf-8
+"set guifont=Ricty\ 10
+"
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'mode_map': {'c': 'NORMAL'},
+"      \ 'active': {
+"      \   'left': [ ['mode', 'paste'], ['fugitive', 'filename', 'cakephp', 'currenttag', 'anzu'] ]
+"      \ },
+"      \ 'component': {
+"      \   'readonly': '%{&readonly?"\u2b64":""}',
+"      \   'lineinfo': ' %3l:%-2v',
+"      \ },
+"      \ 'component_function': {
+"      \   'modified': 'MyModified',
+"      \   'readonly': 'MyReadonly',
+"      \   'fugitive': 'MyFugitive',
+"      \   'filename': 'MyFilename',
+"      \   'fileformat': 'MyFileformat',
+"      \   'filetype': 'MyFiletype',
+"      \   'fileencoding': 'MyFileencoding',
+"      \   'mode': 'MyMode',
+"      \   'anzu': 'anzu#search_status',
+"      \   'currenttag': 'MyCurrentTag',
+"      \   'cakephp': 'MyCakephp',
+"      \ },
+"      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+"      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
+"      \ }
+"let g:lightline.component.tabopts = '%{&et?"et":""}%{&ts}:%{&sw}:%{&sts},%{&tw}'
+"
+"function! MyModified()
+"  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+"endfunction
+"
+"function! MyReadonly()
+"  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? ' ' : ''
+"endfunction
+"
+"function! MyFilename()
+"  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+"          \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+"          \  &ft == 'unite' ? unite#get_status_string() :
+"          \  &ft == 'vimshell' ? vimshell#get_status_string() :
+"          \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+"          \ ('' != MyModified() ? ' ' . MyModified() : '')
+"endfunction
+"
+"function! MyFugitive()
+"  try
+"    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head())
+"      return ' ' . fugitive#head()
+"    endif
+"  catch
+"  endtry
+"  return ''
+"endfunction
+"
+"function! MyFileformat()
+"  return winwidth(0) > 70 ? &fileformat : ''
+"endfunction
+"
+"function! MyFiletype()
+"  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+"endfunction
+"
+"function! MyFileencoding()
+"  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+"endfunction
+"
+"function! MyMode()
+"  return winwidth(0) > 60 ? lightline#mode() : ''
+"endfunction
+"
+"function! MyCurrentTag()
+"  return tagbar#currenttag('%s', '')
+"endfunction
+"
+"function! MyCakephp()
+"  return exists('*cake#buffer') ? cake#buffer('type') : ''
+"endfunction
 
+""(http://qiita.com/yuyuchu3333/items/20a0acfe7e0d0e167ccc)
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'mode_map': {'c': 'NORMAL'},
-      \ 'active': {
-      \   'left': [ ['mode', 'paste'], ['fugitive', 'filename', 'cakephp', 'currenttag', 'anzu'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"\u2b64":""}',
-      \   'lineinfo': ' %3l:%-2v',
-      \ },
-      \ 'component_function': {
-      \   'modified': 'MyModified',
-      \   'readonly': 'MyReadonly',
-      \   'fugitive': 'MyFugitive',
-      \   'filename': 'MyFilename',
-      \   'fileformat': 'MyFileformat',
-      \   'mode': 'MyMode',
-      \   'anzu': 'anzu#search_status',
-      \   'currenttag': 'MyCurrentTag',
-      \   'cakephp': 'MyCakephp',
-      \ },
-      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
-      \ }
-let g:lightline.component.tabopts = '%{&et?"et":""}%{&ts}:%{&sw}:%{&sts},%{&tw}'
+        \ 'colorscheme': 'wombat',
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [
+        \     ['mode', 'paste'],
+        \     ['fugitive', 'gitgutter', 'filename'],
+        \   ],
+        \   'right': [
+        \     ['lineinfo', 'syntastic'],
+        \     ['percent'],
+        \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
+        \   ]
+        \ },
+        \ 'component_function': {
+        \   'modified': 'MyModified',
+        \   'readonly': 'MyReadonly',
+        \   'fugitive': 'MyFugitive',
+        \   'filename': 'MyFilename',
+        \   'fileformat': 'MyFileformat',
+        \   'filetype': 'MyFiletype',
+        \   'fileencoding': 'MyFileencoding',
+        \   'mode': 'MyMode',
+        \   'syntastic': 'SyntasticStatuslineFlag',
+        \   'charcode': 'MyCharCode',
+        \   'gitgutter': 'MyGitGutter',
+        \ },
+        \ 'separator': {'left': '⮀', 'right': '⮂'},
+        \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+        \ }
 
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? ' ' : ''
+  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
 endfunction
 
 function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-          \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-          \  &ft == 'unite' ? unite#get_status_string() :
-          \  &ft == 'vimshell' ? vimshell#get_status_string() :
-          \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-          \ ('' != MyModified() ? ' ' . MyModified() : '')
+ return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+       \  &ft == 'unite' ? unite#get_status_string() :
+       \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
+       \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 function! MyFugitive()
   try
-    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head())
-      return ' ' . fugitive#head()
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      let _ = fugitive#head()
+      return strlen(_) ? '⭠ '._ : ''
     endif
   catch
   endtry
@@ -376,17 +462,80 @@ function! MyFugitive()
 endfunction
 
 function! MyFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
+  return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
+  return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 
-function! MyCurrentTag()
-  return tagbar#currenttag('%s', '')
+function! MyGitGutter()
+    if !  exists('*GitGutterGetHunkSummary')
+           \ || ! get(g:, 'gitgutter_enabled', 0)
+           \ || winwidth('.') <= 90
+      return ''
+    endif
+    let symbols = [
+          \ g:gitgutter_sign_added . ' ',
+          \ g:gitgutter_sign_modified . ' ',
+          \ g:gitgutter_sign_removed . ' '
+          \ ]
+  let hunks = GitGutterGetHunkSummary()
+  let ret = []
+  for i in [0, 1, 2]
+    if hunks[i] > 0
+      call add(ret, symbols[i] . hunks[i])
+    endif
+  endfor
+    return join(ret, ' ')
 endfunction
 
-function! MyCakephp()
-  return exists('*cake#buffer') ? cake#buffer('type') : ''
+" https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
+function! MyCharCode()
+  if winwidth('.') <= 70
+    return ''
+  endif
+
+  " Get the output of :ascii
+  redir => ascii
+  silent!
+  ascii
+    redir END
+
+  if match(ascii, 'NUL') != -1
+    return 'NUL'
+  endif
+
+  " Zero pad hex values
+  let nrformat = '0x%02x'
+  let encoding = (&fenc == '' ? &enc : &fenc)
+
+  if encoding == 'utf-8'
+    " Zero pad with 4 zeroes in unicode files
+    let nrformat = '0x%04x'
+  endif
+
+  " Get the character and the numeric value from the return value of :ascii
+  " This matches the two first pieces of the return value, e.g.
+  " "<F> 70" => char: 'F', nr: '70'
+  let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
+
+  " Format the numeric value
+  let nr = printf(nrformat, nr)
+
+  return "'". char ."' ". nr
 endfunction
+
+""""""""""""" vim-gitgutter
+let g:gitgutter_sign_added = '✚'
+let g:gitgutter_sign_modified = '➜'
+let g:gitgutter_sign_removed = '✘'"
+
