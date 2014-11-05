@@ -1,3 +1,11 @@
+"sunippetの設定
+autocmd BufEnter * if exists("b:rails_root") | NeoComplCacheSetFileType ruby.rails | endif
+autocmd BufEnter * if (expand("%") =~ "_spec\.rb$") || (expand("%") =~ "^spec.*\.rb$") | NeoComplCacheSetFileType ruby.rspec | endif
+let g:neocomplcache_snippets_dir = $HOME . '/.vim/snippets'
+nnoremap <Space>se :<C-U>NeoComplCacheEditSnippets<CR>
+" SuperTab like snippets behavior.
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
 "シンタックス・ハイライトをON
 syntax on
 hi clear
@@ -195,7 +203,7 @@ NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neocomplcache-rsense.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
-"NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'thinca/vim-quickrun'
