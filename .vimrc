@@ -1,11 +1,3 @@
-"sunippetの設定
-autocmd BufEnter * if exists("b:rails_root") | NeoComplCacheSetFileType ruby.rails | endif
-autocmd BufEnter * if (expand("%") =~ "_spec\.rb$") || (expand("%") =~ "^spec.*\.rb$") | NeoComplCacheSetFileType ruby.rspec | endif
-let g:neocomplcache_snippets_dir = $HOME . '/.vim/snippets'
-nnoremap <Space>se :<C-U>NeoComplCacheEditSnippets<CR>
-" SuperTab like snippets behavior.
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-
 "シンタックス・ハイライトをON
 syntax on
 hi clear
@@ -199,11 +191,12 @@ NeoBundle 'basyura/unite-rails'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc' 
 NeoBundle 'alpaca-tc/alpaca_tags'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neocomplcache-rsense.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'thinca/vim-quickrun'
@@ -309,6 +302,23 @@ nnoremap <silent> <C-q> :QuickRun<CR>
 let g:quickrun_config={'*': {'split': 'vertical'}}
 set splitright
 
+"""""""""" snippet "
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
 """""""""" vim-anzu "
 " キーマップ設定
 " nmap n <Plug>(anzu-n)
@@ -324,92 +334,7 @@ nmap <silent> <ESC><ESC> :<C-u>nohlsearch<CR><Plug>(anzu-clear-search-status)
 set statusline=%f%m%=%l,%c\ %{'['.(&fenc!=''?&fenc:&enc).']\['.&fileformat.']'}
 let g:anzu_status_format = "(%i/%l)"
 
-"""""""""" lightline.vim" (from:http://yuheikagaya.hatenablog.jp/entry/2013/09/20/232719)
-"set t_Co=256
-"scriptencoding utf-8
-"set encoding=utf-8
-"set guifont=Ricty\ 10
-"
-"let g:lightline = {
-"      \ 'colorscheme': 'wombat',
-"      \ 'mode_map': {'c': 'NORMAL'},
-"      \ 'active': {
-"      \   'left': [ ['mode', 'paste'], ['fugitive', 'filename', 'cakephp', 'currenttag', 'anzu'] ]
-"      \ },
-"      \ 'component': {
-"      \   'readonly': '%{&readonly?"\u2b64":""}',
-"      \   'lineinfo': ' %3l:%-2v',
-"      \ },
-"      \ 'component_function': {
-"      \   'modified': 'MyModified',
-"      \   'readonly': 'MyReadonly',
-"      \   'fugitive': 'MyFugitive',
-"      \   'filename': 'MyFilename',
-"      \   'fileformat': 'MyFileformat',
-"      \   'filetype': 'MyFiletype',
-"      \   'fileencoding': 'MyFileencoding',
-"      \   'mode': 'MyMode',
-"      \   'anzu': 'anzu#search_status',
-"      \   'currenttag': 'MyCurrentTag',
-"      \   'cakephp': 'MyCakephp',
-"      \ },
-"      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-"      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
-"      \ }
-"let g:lightline.component.tabopts = '%{&et?"et":""}%{&ts}:%{&sw}:%{&sts},%{&tw}'
-"
-"function! MyModified()
-"  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-"endfunction
-"
-"function! MyReadonly()
-"  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? ' ' : ''
-"endfunction
-"
-"function! MyFilename()
-"  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-"          \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-"          \  &ft == 'unite' ? unite#get_status_string() :
-"          \  &ft == 'vimshell' ? vimshell#get_status_string() :
-"          \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-"          \ ('' != MyModified() ? ' ' . MyModified() : '')
-"endfunction
-"
-"function! MyFugitive()
-"  try
-"    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head())
-"      return ' ' . fugitive#head()
-"    endif
-"  catch
-"  endtry
-"  return ''
-"endfunction
-"
-"function! MyFileformat()
-"  return winwidth(0) > 70 ? &fileformat : ''
-"endfunction
-"
-"function! MyFiletype()
-"  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-"endfunction
-"
-"function! MyFileencoding()
-"  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-"endfunction
-"
-"function! MyMode()
-"  return winwidth(0) > 60 ? lightline#mode() : ''
-"endfunction
-"
-"function! MyCurrentTag()
-"  return tagbar#currenttag('%s', '')
-"endfunction
-"
-"function! MyCakephp()
-"  return exists('*cake#buffer') ? cake#buffer('type') : ''
-"endfunction
-
-""(http://qiita.com/yuyuchu3333/items/20a0acfe7e0d0e167ccc)
+"""""""""" lightline.vim" (from:http://qiita.com/yuyuchu3333/items/20a0acfe7e0d0e167ccc)
 let g:lightline = {
         \ 'colorscheme': 'wombat',
         \ 'mode_map': {'c': 'NORMAL'},
@@ -546,4 +471,3 @@ endfunction
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '➜'
 let g:gitgutter_sign_removed = '✘'"
-
