@@ -12,7 +12,7 @@ lightline.vimにanzuをいれたい
 
 ■tmux
 ```
-同時入力
+なし
 ```
 
 ■Bash
