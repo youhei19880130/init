@@ -76,7 +76,7 @@ set number
 set shellslash
 
 "listで表示される文字のフォーマットを指定する
-set listchars=eol:<,tab:\|>
+set listchars=eol:<,tab:\|>,extends:<
 
 "タブ文字、行末など不可視文字を表示する
 set nolist
@@ -85,13 +85,53 @@ set nolist
 set showtabline=1
 
 "クリップボード連携
-"vmap <silent> <Leader>y "*y
-"if has('gui') | set clipboard= | endif
+set clipboard=unnamed
+vmap <silent> <Leader>y "*y
+if has('gui') | set clipboard= | endif
+"set clipboard+=autoselect "有効にするとヤンクの[p]が効かなくなる
 
-"-----
-set backspace=start,eol,indent
-set whichwrap=b,s,[,],,~
+"ポップアップメニューをよしなに
+set completeopt=menu,preview,longest,menuone
+
+"補完候補の設定
+set complete=.,w,b,u,k
+
+"Vi互換をオフ
+set nocompatible
+
+"大文字/小文字を区別しない
+set ignorecase
+
+"検索語句に大文字が含まれている場合のみ大文字/小文字を区別する
+set smartcase
+
+"GREP時に使うプログラム
+set grepprg=internal
+
+"コンソールでもマウス機能を
 set mouse=a
+set guioptions+=a
+"screen対応
+if &term == "screen" | set ttymouse=xterm-256color | endif
+
+"Backspace"
+set backspace=start,eol,indent
+
+"行番号とカーソル行をハイライト(カレントバッファウィンドウだけ)
+augroup cursor_line
+  autocmd!
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END"
+
+"インデント周り
+set et ts=4 sw=4 sts=4
+autocmd FileType vim,sh,html,xhtml,javascript,coffee,ruby,eruby,scala,lua setlocal et ts=2 sw=2 sts=2"
+
+
+
+
+set whichwrap=b,s,[,],,~
 set incsearch
 "set cursorline ※vimのカーソル移動が遅くなるらしい
 set tabstop=2
@@ -131,7 +171,7 @@ function! s:my_tabline()  "{{{
 		let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
 		let no = i  " display 0-origin tabpagenr.
 		let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-		let title = fnamemodify(bufname(bufnr), ':t')
+let title = fnamemodify(bufname(bufnr), ':t')
 		let title = '[' . title . ']'
 		let s .= '%'.i.'T'
 		let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
@@ -169,10 +209,6 @@ nnoremap OB gi<Down>
 nnoremap OC gi<Right>
 nnoremap OD gi<Left>
 
-
-"クリップボードの共有
-set clipboard+=autoselect "有効にするとヤンクの[p]が効かなくなる
-set clipboard=unnamed
 
 set nocompatible " be iMproved
 filetype off

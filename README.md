@@ -27,7 +27,7 @@ lightline.vimにanzuをいれたい
 
 ■その他
 ```
-天野さんを参考に(https://github.com/amasho/dotfiles/blob/master/.vimrc)
+天野さんを参考に(https://github.com/amasho/dotfiles/blob/master/.vimrc)  -->162行目から
 noremap :再帰的にxxxしない
 USキーボードxxx
 ```
