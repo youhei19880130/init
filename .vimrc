@@ -11,6 +11,8 @@ set directory=$HOME
 
 "検索結果をハイライト
 set hlsearch
+"インクリメントな検索を行う
+set incsearch
 
 "TITLEを表示する
 set title
@@ -59,9 +61,11 @@ set autoindent
 "コピペしたときとかうっとおしいのでやらない
 "set smartindent
 
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
-set smarttab
-set shiftwidth=2
+"インデント設定
+set smarttab     "改行時に行末のタブを判断して、インデントしてくれる
+set shiftwidth=2 "自動インデントでずれる幅
+set tabstop=2    "Tabを押した時にインデントする幅
+set expandtab    "Tab入力を半角スペースに置き換えてくれる
 
 " viminfoファイルを作成しない
 set viminfo=
@@ -129,17 +133,9 @@ set et ts=4 sw=4 sts=4
 autocmd FileType vim,sh,html,xhtml,javascript,coffee,ruby,eruby,scala,lua setlocal et ts=2 sw=2 sts=2"
 
 
-
-
-set whichwrap=b,s,[,],,~
-set incsearch
-"set cursorline ※vimのカーソル移動が遅くなるらしい
-set tabstop=2
-set expandtab
-
+""次回はここから！！""
 highlight Normal ctermbg=black ctermfg=grey
 highlight StatusLine term=none cterm=none ctermfg=black ctermbg=grey
-"highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray ※vimのカーソル移動が遅くなるらしい
    
 " vimのバックアップファイル
 set directory=~/tmp/.swap
@@ -208,7 +204,6 @@ nnoremap OA gi<Up>
 nnoremap OB gi<Down>
 nnoremap OC gi<Right>
 nnoremap OD gi<Left>
-
 
 set nocompatible " be iMproved
 filetype off
