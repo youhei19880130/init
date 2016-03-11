@@ -7,10 +7,6 @@ export ZSH=$HOME/.oh-my-zsh
 export LSCOLORS=gxfxcxdxbxegedabagacad 
 export TERM=xterm-256color
 
-# rails.vimの設定関連(20140806)
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -61,7 +57,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -116,3 +112,11 @@ alias gbrd="git branch -a --merged | grep -v master | grep remotes/origin| sed -
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+eval "$(rbenv init -)"
+eval "$(direnv hook zsh)"
+export EDITOR=vi
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/someya_yohhei/.sdkman"
+[[ -s "/Users/someya_yohhei/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/someya_yohhei/.sdkman/bin/sdkman-init.sh"

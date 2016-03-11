@@ -205,13 +205,11 @@ nnoremap OB gi<Down>
 nnoremap OC gi<Right>
 nnoremap OD gi<Left>
 
-set nocompatible " be iMproved
-filetype off
 
 if has('vim_starting')
-set runtimepath+=~/.vim/bundle/neobundle.vim
-call neobundle#rc(expand('~/.vim/bundle/'))
+  set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
+call neobundle#begin(expand('~/.vim/bundle/'))
 ""ここに必要なプラグインを書く
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-rails'
@@ -224,8 +222,8 @@ NeoBundle 'Shougo/vimproc'
 NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'Shougo/neosnippet'
+"NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'vim-scripts/Align'
@@ -240,6 +238,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'violetyk/cake.vim'
 NeoBundle 'majutsushi/tagbar'
+call neobundle#end()
 filetype plugin indent on " require
 filetype indent on
 syntax on
