@@ -58,7 +58,6 @@ set ambiwidth=double
 set autoindent
 
 "新しい行を作ったときに高度な自動インデントを行う
-"コピペしたときとかうっとおしいのでやらない
 "set smartindent
 
 "インデント設定
@@ -89,9 +88,9 @@ set nolist
 set showtabline=1
 
 "クリップボード連携
-set clipboard=unnamed
-vmap <silent> <Leader>y "*y
-if has('gui') | set clipboard= | endif
+set clipboard=unnamed,autoselect
+"vmap <silent> <Leader>y "*y
+"if has('gui') | set clipboard= | endif
 "set clipboard+=autoselect "有効にするとヤンクの[p]が効かなくなる
 
 "ポップアップメニューをよしなに
