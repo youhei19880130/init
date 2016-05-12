@@ -204,6 +204,9 @@ nnoremap OB gi<Down>
 nnoremap OC gi<Right>
 nnoremap OD gi<Left>
 
+"""""""""" Neobundle
+set nocompatible               " Be iMproved
+filetype off                   " Required!
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
@@ -217,12 +220,14 @@ NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'AutoClose'
 NeoBundle 'basyura/unite-rails'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc' 
 NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
-"NeoBundle 'Shougo/neosnippet'
-"NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'vim-scripts/Align'
@@ -241,6 +246,13 @@ call neobundle#end()
 filetype plugin indent on " require
 filetype indent on
 syntax on
+" Installation check.
+if neobundle#exists_not_installed_bundles()
+  echomsg 'Not installed bundles : ' .
+        \ string(neobundle#get_not_installed_bundle_names())
+  echomsg 'Please execute ":NeoBundleInstall" command.'
+  "finish
+endif
 
 """""""""Markdown仕様"
 au BufRead,BufNewFile *.md set filetype=markdown
@@ -267,8 +279,6 @@ nnoremap <silent> <Leader>ub :<C-u>Unite buffer<CR>
 " ファイル一覧
 nnoremap <silent> <Leader>uf :<C-u>Unite file<CR>
 nnoremap <silent> <Leader>ufa :<C-u>Unite -input=**/* file<CR>
-nnoremap <silent> <Leader>ff :<C-u>Unite file<CR>
-nnoremap <silent> <Leader>ffa :<C-u>Unite -input=**/* file<CR>
 " ファイル一覧(現在開いているファイルのディレクトリ)
 nnoremap <silent> <Leader>ufc :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
@@ -305,6 +315,48 @@ if executable('ag')
 endif
 "}}}
 
+"""""""""" ctrlp.vim
+nmap <F5> :CtrlP <CR>
+
+"""""""""" neocomplcache
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : ''
+    \ }
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup() 
+
+" cooperation to Rsense
+let g:rsenseUseOmniFunc = 1
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
 
 """"""""""easymotion　…使い方がわからないorz
 " Lokaltog/vim-easymotion
@@ -499,4 +551,7 @@ endfunction
 """"""""""""" vim-gitgutter
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '➜'
-let g:gitgutter_sign_removed = '✘'"
+let g:gitgutter_sign_removed = '✘'
+
+"""""""""""" Rsence
+let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec/"
