@@ -227,6 +227,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'szw/vim-tags'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neocomplete.vim'
@@ -315,8 +316,15 @@ if executable('ag')
 endif
 "}}}
 
+"""""""""" vim-tags
+let g:vim_tags_project_tags_command = "/usr/local/Cellar/ctags/5.8/bin/ctags -f tags -R . 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/Cellar/ctags/5.8/bin/ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+set tags+=tags,Gemfile.lock.tags
+nmap <silent> nn :tjump<CR>
+nmap <silent> mm <C-t>
+
 """""""""" ctrlp.vim
-nmap <F5> :CtrlP <CR>
+nmap <silent> bb :CtrlP <CR>
 
 """""""""" neocomplcache
 " Disable AutoComplPop.

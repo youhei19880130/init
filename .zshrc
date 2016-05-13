@@ -120,3 +120,6 @@ export EDITOR=vi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/someya_yohhei/.sdkman"
 [[ -s "/Users/someya_yohhei/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/someya_yohhei/.sdkman/bin/sdkman-init.sh"
+
+#ctags Setting
+alias ctags="`brew --prefix`/bin/ctags"
