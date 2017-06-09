@@ -123,3 +123,5 @@ export SDKMAN_DIR="/Users/someya_yohhei/.sdkman"
 
 #ctags Setting
 alias ctags="`brew --prefix`/bin/ctags"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

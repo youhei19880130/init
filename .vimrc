@@ -560,6 +560,11 @@ endfunction
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '➜'
 let g:gitgutter_sign_removed = '✘'
+let g:gitgutter_max_signs = 9999
 
 """""""""""" Rsence
 let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec/"
+
+"""""""""""" linter
+let g:syntastic_css_checkers = ['stylelint']
+let g:syntastic_scss_checkers = ['stylelint']

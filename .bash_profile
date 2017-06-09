@@ -30,3 +30,5 @@ export PATH=/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/
 
 export PATH=/Users/a12777/.rbenv/shims:/Users/a12777/.rbenv/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/a12777/.rvm/bin:/usr/local/mysql/bin
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
