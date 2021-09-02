@@ -113,7 +113,6 @@ alias gbrd="git branch -a --merged | grep -v master | grep remotes/origin| sed -
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 eval "$(rbenv init -)"
-eval "$(direnv hook zsh)"
 export EDITOR=vi
 
 
@@ -125,3 +124,6 @@ export SDKMAN_DIR="/Users/someya_yohhei/.sdkman"
 alias ctags="`brew --prefix`/bin/ctags"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"

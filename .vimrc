@@ -243,6 +243,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'violetyk/cake.vim'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'slim-template/vim-slim'
 call neobundle#end()
 filetype plugin indent on " require
 filetype indent on
