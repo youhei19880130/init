@@ -204,57 +204,32 @@ nnoremap OB gi<Down>
 nnoremap OC gi<Right>
 nnoremap OD gi<Left>
 
-"""""""""" Neobundle
-set nocompatible               " Be iMproved
-filetype off                   " Required!
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-endif
-call neobundle#begin(expand('~/.vim/bundle/'))
+" --- vim-plug ---
+call plug#begin('~/.vim/plugged')
 ""ここに必要なプラグインを書く
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-rails'
-"NeoBundle 'dbext.vim'
-NeoBundle 'haya14busa/vim-easymotion'
-NeoBundle 'AutoClose'
-NeoBundle 'basyura/unite-rails'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/vimproc' 
-NeoBundle 'alpaca-tc/alpaca_tags'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'tmhedberg/matchit'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'szw/vim-tags'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'vim-scripts/Align'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'violetyk/cake.vim'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'slim-template/vim-slim'
-call neobundle#end()
-filetype plugin indent on " require
-filetype indent on
-syntax on
-" Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-  "finish
-endif
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-rails'
+Plug 'haya14busa/vim-easymotion'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Shougo/neomru.vim'
+Plug 'rking/ag.vim'
+Plug 'tmhedberg/matchit'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-scripts/Align'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'thinca/vim-quickrun'
+Plug 'preservim/vim-markdown'
+Plug 'kannokanno/previm'
+Plug 'tyru/open-browser.vim'
+Plug 'osyo-manga/vim-anzu'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'preservim/tagbar'
+Plug 'slim-template/vim-slim'
+call plug#end()
 
 """""""""Markdown仕様"
 au BufRead,BufNewFile *.md set filetype=markdown
@@ -356,8 +331,6 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup() 
 
